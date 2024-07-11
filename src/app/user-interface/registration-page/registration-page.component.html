@@ -1,0 +1,47 @@
+<form class="registration-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1>Registration</h1>
+
+  <div class="registration-form-input-wrapper">
+    <input
+      [ngClass]="{
+        invalid: form?.get('name')?.touched && form?.get('name')?.invalid
+      }"
+      formControlName="name"
+      type="text"
+      id="registration"
+      placeholder="Login"
+    />
+
+    <input
+      [ngClass]="{
+        invalid: form?.get('password')?.touched && form?.get('password')?.invalid
+      }"
+      formControlName="password"
+      type="password"
+      id="password"
+      placeholder="Password"
+    />
+  </div>
+  <div
+    class="email-form-error"
+    *ngIf="form?.get('name')?.touched && form?.get('name')?.invalid  "
+  >
+    <small
+      style="margin-right: 12rem;"
+    >Enter email
+    </small>
+  </div>
+  <div
+    class="password-form-error"
+    *ngIf="form?.get('password')?.touched && form?.get('password')?.invalid "
+  >
+    <small
+      style="margin-right: -0.8rem;;"
+    >Enter password (minimal length 8 symbol)
+    </small>
+  </div>
+
+  <button [disabled]="form.invalid" class="btn-submit" type="submit">
+    Create account
+  </button>
+</form>
