@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {Post} from "../interface";
+import { Post } from '../interface';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PostService {
   public CurrentPost: any;

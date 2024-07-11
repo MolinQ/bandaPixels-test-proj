@@ -60,7 +60,9 @@ select {
 
 html {
   font-size: 20px;
-  font-family: "MuseoModerno", Inter sans-serif;
+  font-family:
+    'MuseoModerno',
+    Inter sans-serif;
 }
 
 @media screen and (max-height: 810px) {

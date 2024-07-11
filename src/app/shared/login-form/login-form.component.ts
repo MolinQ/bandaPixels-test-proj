@@ -1,8 +1,18 @@
-import { Component } from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ActivatedRoute, Router, RouterLink, RouterModule} from "@angular/router";
-import {AuthService} from "../../data/services/auth.service";
-import {CommonModule, NgIf} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterModule
+} from '@angular/router';
+import { AuthService } from '../../data/services/auth.service';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login-form',
@@ -13,18 +23,18 @@ import {CommonModule, NgIf} from "@angular/common";
     NgIf,
     RouterModule,
     ReactiveFormsModule,
-    CommonModule],
+    CommonModule
+  ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit{
   form!: FormGroup;
-
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private auth: AuthService,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
@@ -32,8 +42,8 @@ export class LoginFormComponent {
       name: new FormControl('', [Validators.required]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8),
-      ]),
+        Validators.minLength(8)
+      ])
     });
   }
 
@@ -47,9 +57,7 @@ export class LoginFormComponent {
       },
       () => {
         alert('enter correct username and password');
-      },
+      }
     );
   }
-
-
 }

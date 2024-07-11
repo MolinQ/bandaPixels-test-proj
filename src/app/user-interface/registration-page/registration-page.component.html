@@ -14,7 +14,8 @@
 
     <input
       [ngClass]="{
-        invalid: form?.get('password')?.touched && form?.get('password')?.invalid
+        invalid:
+          form?.get('password')?.touched && form?.get('password')?.invalid
       }"
       formControlName="password"
       type="password"
@@ -24,20 +25,16 @@
   </div>
   <div
     class="email-form-error"
-    *ngIf="form?.get('name')?.touched && form?.get('name')?.invalid  "
+    *ngIf="form?.get('name')?.touched && form?.get('name')?.invalid"
   >
-    <small
-      style="margin-right: 12rem;"
-    >Enter email
-    </small>
+    <small style="margin-right: 12rem">Enter email </small>
   </div>
   <div
     class="password-form-error"
-    *ngIf="form?.get('password')?.touched && form?.get('password')?.invalid "
+    *ngIf="form?.get('password')?.touched && form?.get('password')?.invalid"
   >
-    <small
-      style="margin-right: -0.8rem;;"
-    >Enter password (minimal length 8 symbol)
+    <small style="margin-right: -0.8rem"
+      >Enter password (minimal length 8 symbol)
     </small>
   </div>
 

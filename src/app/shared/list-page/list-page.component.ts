@@ -1,11 +1,17 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {AuthService} from "../../data/services/auth.service";
-import {PostService} from "../../data/services/post.service";
-import {Router, RouterLink} from "@angular/router";
-import {forkJoin, map, switchMap} from "rxjs";
-import {FormsModule} from "@angular/forms";
-import {AsyncPipe, CommonModule, NgFor, NgIf, NgOptimizedImage} from "@angular/common";
-import {TimeToNumberPipe} from "../../data/pipes/TimeToString.pipe";
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '../../data/services/auth.service';
+import { PostService } from '../../data/services/post.service';
+import { Router, RouterLink } from '@angular/router';
+import { forkJoin, map, switchMap } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import {
+  AsyncPipe,
+  CommonModule,
+  NgFor,
+  NgIf,
+  NgOptimizedImage
+} from '@angular/common';
+import { TimeToNumberPipe } from '../../data/pipes/TimeToString.pipe';
 
 @Component({
   selector: 'app-list-page',
@@ -23,7 +29,7 @@ import {TimeToNumberPipe} from "../../data/pipes/TimeToString.pipe";
   templateUrl: './list-page.component.html',
   styleUrl: './list-page.component.scss'
 })
-export class ListPageComponent implements OnInit{
+export class ListPageComponent implements OnInit {
   @Input() showCreateButton!: boolean;
 
   @Input() showClientPost!: boolean;
@@ -48,7 +54,7 @@ export class ListPageComponent implements OnInit{
     public auth: AuthService,
     private postService: PostService,
     private router: Router,
-    private changeDetection: ChangeDetectorRef,
+    private changeDetection: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -56,9 +62,10 @@ export class ListPageComponent implements OnInit{
     this.postService.isClientEdit = false;
     this.postService.isCreatePost = false;
     if (this.showClientPost) {
-      this.postService.getPost().subscribe((response) => {
+      this.postService.getPost().subscribe(response => {
         this.changeDetection.detectChanges();
         this.collection = response;
+        this.collection = this.collection.reverse()
       });
     }
 
@@ -66,12 +73,12 @@ export class ListPageComponent implements OnInit{
       this.users = this.postService
         .getUsers()
         .pipe(
-          switchMap((users) => {
+          switchMap(users => {
             this.users = users;
             return forkJoin(
-              this.users.map((user) => this.postService.getAdminPost(user.id)),
+              this.users.map(user => this.postService.getAdminPost(user.id))
             ).pipe(
-              map((posts) => {
+              map(posts => {
                 this.posts = posts;
                 const filteredUsers = [];
                 const filteredPosts = [];
@@ -83,11 +90,11 @@ export class ListPageComponent implements OnInit{
                 }
                 this.userPost = filteredPosts;
                 return filteredUsers;
-              }),
+              })
             );
-          }),
+          })
         )
-        .subscribe((users) => {
+        .subscribe(users => {
           this.usersInPost = users;
         });
     }
@@ -96,7 +103,7 @@ export class ListPageComponent implements OnInit{
   filterPosts() {
     if (this.collection) {
       return this.collection.filter((post: any) =>
-        post.message.includes(this.searchText),
+        post.message.includes(this.searchText)
       );
     }
   }

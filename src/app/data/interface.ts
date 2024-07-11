@@ -10,8 +10,3 @@ export interface Post {
   message: string;
   done: boolean;
 }
-
-export interface UserPost {
-  id: number;
-  post: any;
-}

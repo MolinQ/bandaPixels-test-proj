@@ -69,7 +69,8 @@ input {
 //    margin-top: 6.35rem;
 //  }
 //}
-.email-form-error, .password-form-error {
+.email-form-error,
+.password-form-error {
   color: red;
 }
 
@@ -97,7 +98,6 @@ small {
 }
 
 button:disabled {
-  background-color: darken(#686082,20%);
-  color: darken(white,50%);;
+  background-color: darken(#686082, 20%);
+  color: darken(white, 50%);
 }
-

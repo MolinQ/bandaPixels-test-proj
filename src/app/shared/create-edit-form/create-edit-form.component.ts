@@ -1,22 +1,23 @@
-import {Component, Input} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {PostService} from "../../data/services/post.service";
-import {CommonModule, NgOptimizedImage} from "@angular/common";
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { PostService } from '../../data/services/post.service';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-create-edit-form',
   standalone: true,
-  imports: [
-    NgOptimizedImage,
-    ReactiveFormsModule,
-    CommonModule
-  ],
+  imports: [NgOptimizedImage, ReactiveFormsModule, CommonModule],
   templateUrl: './create-edit-form.component.html',
   styleUrl: './create-edit-form.component.scss'
 })
-export class CreateEditFormComponent {
-    @Input() showEdit: boolean;
+export class CreateEditFormComponent implements OnInit{
+  @Input() showEdit: boolean;
 
   @Input() showCreate: boolean;
 
@@ -37,12 +38,12 @@ export class CreateEditFormComponent {
     date: new FormControl('', Validators.required),
     hours: new FormControl('', Validators.required),
     message: new FormControl('', Validators.required),
-    done: new FormControl(false),
+    done: new FormControl(false)
   });
 
   constructor(
     private router: Router,
-    private postService: PostService,
+    private postService: PostService
   ) {}
 
   formatMinutesToTime(minutes: number): string {
@@ -72,29 +73,29 @@ export class CreateEditFormComponent {
         date: new FormControl('', Validators.required),
         hours: new FormControl('', Validators.required),
         message: new FormControl('', Validators.required),
-        done: new FormControl(false),
+        done: new FormControl(false)
       });
     }
 
     if (this.postService.isClientEdit) {
       this.isClient = true;
-      this.postService.getCurrentPost().subscribe((response) => {
+      this.postService.getCurrentPost().subscribe(response => {
         this.post = response;
         this.form = new FormGroup({
           id: new FormControl(this.postService.CurrentPost.id),
           date: new FormControl(
             this.postService.CurrentPost.date,
-            Validators.required,
+            Validators.required
           ),
           hours: new FormControl(
             this.formatMinutesToTime(this.postService.CurrentPost.hours),
-            Validators.required,
+            Validators.required
           ),
           message: new FormControl(
             this.postService.CurrentPost.message,
-            Validators.required,
+            Validators.required
           ),
-          done: new FormControl(this.postService.CurrentPost.done),
+          done: new FormControl(this.postService.CurrentPost.done)
         });
       });
     }
@@ -105,17 +106,17 @@ export class CreateEditFormComponent {
         id: new FormControl(this.postService.selectedAdminPost.id),
         date: new FormControl(
           this.postService.selectedAdminPost.date,
-          Validators.required,
+          Validators.required
         ),
         hours: new FormControl(
           this.formatMinutesToTime(this.postService.selectedAdminPost.hours),
-          Validators.required,
+          Validators.required
         ),
         message: new FormControl(
           this.postService.selectedAdminPost.message,
-          Validators.required,
+          Validators.required
         ),
-        done: new FormControl(this.postService.selectedAdminPost.done),
+        done: new FormControl(this.postService.selectedAdminPost.done)
       });
     }
   }
@@ -139,16 +140,16 @@ export class CreateEditFormComponent {
         date: this.form.value.date,
         hours: +this.fullTime,
         message: this.form.value.message,
-        done: this.form.value.done,
+        done: this.form.value.done
       };
       this.postService.createPost(pushPostForm).subscribe(
         () => {
           this.router.navigate(['/client', 'list']);
           this.isNewPost = false;
         },
-        (error) => {
+        error => {
           alert(error.error.message);
-        },
+        }
       );
     }
 
@@ -162,7 +163,7 @@ export class CreateEditFormComponent {
         date: this.form.value.date,
         hours: +this.fullTime,
         message: this.form.value.message,
-        done: this.form.value.done,
+        done: this.form.value.done
       };
       this.postService
         .updatePost(this.form.value.id, pushClientForm)
@@ -180,7 +181,7 @@ export class CreateEditFormComponent {
         date: this.form.value.date,
         hours: +this.fullTime,
         message: this.form.value.message,
-        done: this.form.value.done,
+        done: this.form.value.done
       };
       this.postService
         .updatePost(this.form.value.id, pushAdminForm)
@@ -200,7 +201,7 @@ export class CreateEditFormComponent {
         date: new FormControl('', Validators.required),
         hours: new FormControl('', Validators.required),
         message: new FormControl('', Validators.required),
-        done: new FormControl(false),
+        done: new FormControl(false)
       });
     });
     if (this.isClient) {
@@ -218,4 +219,3 @@ export class CreateEditFormComponent {
     this.modalActive = false;
   }
 }
-

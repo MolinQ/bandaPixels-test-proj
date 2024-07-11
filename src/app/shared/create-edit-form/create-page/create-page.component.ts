@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
-import {CreateEditFormComponent} from "../create-edit-form.component";
+import { CreateEditFormComponent } from '../create-edit-form.component';
 
 @Component({
   selector: 'app-create-page',
   standalone: true,
-  imports: [
-    CreateEditFormComponent
-  ],
+  imports: [CreateEditFormComponent],
   templateUrl: './create-page.component.html',
   styleUrl: './create-page.component.scss'
 })
-export class CreatePageComponent {
-
-}
+export class CreatePageComponent {}

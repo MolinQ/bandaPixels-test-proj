@@ -1,29 +1,13 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="form-wrapper">
-
   <h1 *ngIf="showEdit">Edit</h1>
   <h1 *ngIf="showCreate">Add new</h1>
 
-
   <div class="form-input-wrapper">
-    <input
-      id="date"
-      formControlName="date"
-      type="Date"
-      placeholder="Date"
-    />
+    <input id="date" formControlName="date" type="Date" placeholder="Date" />
 
-    <input
-      formControlName="hours"
-      id="time"
-      type="Time"
-      placeholder="Time"
-    />
+    <input formControlName="hours" id="time" type="Time" placeholder="Time" />
 
-    <textarea
-      placeholder="Note"
-      formControlName="message"
-    >
-    </textarea>
+    <textarea placeholder="Note" formControlName="message"> </textarea>
   </div>
   <div class="activated-wrapper">
     <div class="checkbox-wrapper">
@@ -40,12 +24,13 @@
       '
     </div>
     <div *ngIf="!showEdit"></div>
-    <a *ngIf="showEdit" >
+    <a *ngIf="showEdit">
       <img
         alt="none"
         src="../../../assets/images/delete.png"
         style="cursor: pointer"
-        (click)="modalOn()"/>
+        (click)="modalOn()"
+      />
     </a>
   </div>
 
@@ -63,7 +48,8 @@
       [disabled]="form.invalid"
       type="submit"
       *ngIf="showCreate"
-      class="create-button">
+      class="create-button"
+    >
       Create
     </button>
   </div>

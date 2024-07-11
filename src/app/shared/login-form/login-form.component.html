@@ -4,7 +4,7 @@
     <div class="form__input__wrapper">
       <input
         [ngClass]="{
-        invalid: form?.get('name')?.touched && form?.get('name')?.invalid
+          invalid: form?.get('name')?.touched && form?.get('name')?.invalid
         }"
         formControlName="name"
         type="text"
@@ -13,8 +13,9 @@
       />
       <input
         [ngClass]="{
-        invalid: form?.get('password')?.touched && form?.get('password')?.invalid
-      }"
+          invalid:
+            form?.get('password')?.touched && form?.get('password')?.invalid
+        }"
         formControlName="password"
         type="password"
         id="password"
@@ -24,24 +25,22 @@
   </div>
   <div
     class="email-form-error"
-    *ngIf="form?.get('name')?.touched && form?.get('name')?.invalid && form?.get('name')?.errors?.['required'] "
+    *ngIf="
+      form?.get('name')?.touched &&
+      form?.get('name')?.invalid &&
+      form?.get('name')?.errors?.['required']
+    "
   >
-    <small
-      style="margin-right: 12rem;"
-    >Enter email
-    </small>
+    <small style="margin-right: 12rem">Enter email </small>
   </div>
   <div
     class="password-form-error"
-    *ngIf="form?.get('password')?.touched && form?.get('password')?.invalid "
+    *ngIf="form?.get('password')?.touched && form?.get('password')?.invalid"
   >
-    <small
-      style="margin-right: -0.8rem;;"
-    >Enter password (minimal length 8 symbol)
+    <small style="margin-right: -0.8rem"
+      >Enter password (minimal length 8 symbol)
     </small>
   </div>
   <button class="btn-submit" type="submit">Login</button>
   <a routerLink="/registration" class="registration-link"> Registration </a>
-
-
 </form>
